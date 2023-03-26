@@ -5,9 +5,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com/alexey.mavrin/pa-ctrl/cmd/internal/config"
-	"github.com/alexey.mavrin/pa-ctrl/internal/k8s"
-	"github.com/alexey.mavrin/pa-ctrl/internal/server"
+	"github.com/amavrin/pa-ctrl/cmd/internal/config"
+	"github.com/amavrin/pa-ctrl/internal/k8s"
+	"github.com/amavrin/pa-ctrl/internal/server"
 	zlog "github.com/rs/zerolog/log"
 )
 

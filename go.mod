@@ -1,4 +1,4 @@
-module github.com/alexey.mavrin/pa-ctrl
+module github.com/amavrin/pa-ctrl
 
 go 1.19
 
