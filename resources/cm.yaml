@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hpa-config
+data:
+  deployments.yaml: |
+    - name: dep1
+      min: 2
+      max: 4
+    - name: dep2
+      min: 2
+      max: 6
+  config.yaml: |
+    key: value
+    key2: value2

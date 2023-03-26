@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pa-ctrl
+  name: pa-ctrl
+  namespace: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pa-ctrl
+  template:
+    metadata:
+      labels:
+        app: pa-ctrl
+    spec:
+      serviceAccount: pa-ctrl-sa
+      containers:
+        - image: docker.io/library/pa-ctrl:t1
+          name: pa-ctrl
+          imagePullPolicy: Never
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pa-ctrl
+  name: pa-ctrl
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: pa-ctrl
+  type: ClusterIP
