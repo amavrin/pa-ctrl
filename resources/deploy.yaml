@@ -22,6 +22,14 @@ spec:
         - image: docker.io/library/pa-ctrl:t1
           name: pa-ctrl
           imagePullPolicy: Never
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
           env:
             - name: POD_NAME
               valueFrom:
