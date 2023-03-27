@@ -2,6 +2,7 @@ build:
 	go build -o pa-ctrl cmd/main.go
 
 image:
+	docker build . -f Dockerfile.base -t pa-ctrl:base
 	docker build . -t pa-ctrl:t1
 
 load:
@@ -25,4 +26,4 @@ cm:
 	kubectl -n test apply -f resources/cm.yaml
 
 cluster:
-	kind create cluster
+	KUBECONFIG=~/.kube/config-colima kind create cluster
