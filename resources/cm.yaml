@@ -5,11 +5,11 @@ metadata:
 data:
   deployments.yaml: |
     - name: dep1
-      min: 2
-      max: 4
     - name: dep2
-      min: 2
-      max: 6
-  config.yaml: |
-    key: value
-    key2: value2
+      minReplicas: 2
+      maxReplicas: 6
+  status.yaml: |
+    - name: dep1
+      replicas: 1
+    - name: dep2
+      replicas: 3

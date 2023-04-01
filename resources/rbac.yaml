@@ -13,9 +13,11 @@ metadata:
 rules:
   - apiGroups:
       - ""
+      - apps
       - coordination.k8s.io
     resources:
       - configmaps
+      - deployments
       - leases
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
