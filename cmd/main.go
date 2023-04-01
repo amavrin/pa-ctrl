@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"os"
-	"sync"
 
 	"github.com/amavrin/pa-ctrl/cmd/internal/config"
 	"github.com/amavrin/pa-ctrl/internal/k8s"
@@ -12,8 +11,6 @@ import (
 )
 
 func main() {
-	mutex := &sync.Mutex{}
-
 	clientset, namespace, err := config.Load()
 	if err != nil {
 		zlog.Print("configure error: ", err)
@@ -23,14 +20,13 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	go k8s.WatchForChanges(ctx, clientset, namespace, mutex)
+	go k8s.WatchForChanges(ctx, clientset, namespace)
 
-	go server.Serve(mutex)
+	go server.Serve()
+
+	k8s.Leader.Lock()
+	go k8s.ProcessTargetDeployments(ctx, clientset, namespace)
 
 	podName := os.Getenv("POD_NAME")
-	lockName := "pa-ctrl-lock"
-	zlog.Print("getting lock ", lockName, ", identity ", podName,
-		", namespace ", namespace)
-	lock := k8s.GetNewLock(clientset, lockName, podName, namespace)
-	k8s.RunLeaderElection(ctx, lock, podName)
+	k8s.RunLeaderElection(ctx, clientset, podName, namespace)
 }
