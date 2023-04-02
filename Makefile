@@ -25,5 +25,14 @@ logs:
 cm:
 	kubectl -n test apply -f resources/cm.yaml
 
-cluster:
+create-cluster:
 	KUBECONFIG=~/.kube/config-colima kind create cluster
+
+delete-cluster:
+	KUBECONFIG=~/.kube/config-colima kind delete cluster
+
+copy-config:
+	cp ~/.kube/config-colima ~/.kube/config
+
+metrics-server:
+	kubectl apply -k resources/metrics-server/
