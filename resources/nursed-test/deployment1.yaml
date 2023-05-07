@@ -16,7 +16,15 @@ spec:
     metadata:
       labels:
         app: dep1
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/metrics'
     spec:
       containers:
         - image: docker.io/library/nursed-test:t1
           name: dep1
+          ports:
+          - name: metrics
+            containerPort: 8080
+            protocol: TCP
