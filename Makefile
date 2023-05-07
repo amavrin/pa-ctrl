@@ -27,12 +27,11 @@ cm:
 
 create-cluster:
 	KUBECONFIG=~/.kube/config-colima kind create cluster
+	kind get kubeconfig > ~/.kube/config-kind
+	chmod 600 ~/.kube/config-kind
 
 delete-cluster:
 	KUBECONFIG=~/.kube/config-colima kind delete cluster
-
-copy-config:
-	cp ~/.kube/config-colima ~/.kube/config
 
 metrics-server:
 	kubectl apply -k resources/metrics-server/
