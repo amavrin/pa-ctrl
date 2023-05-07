@@ -11,8 +11,8 @@ load:
 
 deploy:
 	kubectl apply -f resources/ns.yaml
-	kubectl -n test apply -f resources/rbac.yaml
-	kubectl -n test apply -f resources/deploy.yaml
+	kubectl -n test apply -f resources/pa-ctrl/rbac.yaml
+	kubectl -n test apply -f resources/pa-ctrl/deploy.yaml
 
 restart:
 	kubectl -n test rollout restart deployment pa-ctrl
@@ -24,7 +24,7 @@ logs:
 	stern -n test pa-ctrl
 
 cm:
-	kubectl -n test apply -f resources/cm.yaml
+	kubectl -n test apply -f resources/pa-ctrl/cm.yaml
 
 create-cluster:
 	KUBECONFIG=~/.kube/config-colima kind create cluster
