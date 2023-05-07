@@ -24,6 +24,12 @@ deploy-nursed-test:
 	kubectl -n test apply -f resources/nursed-test/deployment1.yaml
 	kubectl -n test apply -f resources/nursed-test/deployment2.yaml
 
+deploy-prometheus:
+	kubectl apply -f resources/ns.yaml
+	kubectl -n test apply -f resources/prometheus/rbac.yaml
+	kubectl -n test apply -f resources/prometheus/config.yaml
+	kubectl -n test apply -f resources/prometheus/deployment.yaml
+
 restart:
 	kubectl -n test rollout restart deployment pa-ctrl
 
