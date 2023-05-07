@@ -1,0 +1,9 @@
+FROM pa-ctrl:base
+COPY cmd/nursed-test /app/cmd/nursed-test
+WORKDIR /app
+RUN go build -o /nursed-test cmd/nursed-test/main.go
+
+FROM alpine
+COPY --from=0 /nursed-test /nursed-test
+
+CMD /nursed-test
