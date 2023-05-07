@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 
-	"github.com/amavrin/pa-ctrl/cmd/internal/config"
+	"github.com/amavrin/pa-ctrl/cmd/pa-ctrl/internal/config"
 	"github.com/amavrin/pa-ctrl/internal/k8s"
 	"github.com/amavrin/pa-ctrl/internal/server"
 	zlog "github.com/rs/zerolog/log"

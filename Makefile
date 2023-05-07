@@ -1,5 +1,5 @@
 build:
-	go build -o pa-ctrl cmd/main.go
+	go build -o pa-ctrl cmd/pa-ctrl/main.go
 
 image:
 	docker build . -f Dockerfile.base -t pa-ctrl:base
